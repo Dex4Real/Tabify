@@ -96,6 +96,17 @@
   <script>
     const GENERIC_ALBUM_COVER = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
 
+    const ROYALTY_FREE_COVERS = [
+      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80", // guitar closeup
+      "https://images.pexels.com/photos/164936/pexels-photo-164936.jpeg?auto=compress&w=400", // guitar on wood
+      "https://cdn.pixabay.com/photo/2016/11/29/09/32/adult-1868750_1280.jpg", // person playing guitar
+      "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80", // concert crowd
+      "https://images.pexels.com/photos/164936/pexels-photo-164936.jpeg?auto=compress&w=400", // guitar
+      "https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_1280.jpg", // guitar student
+    ];
+
+    const ELECTRIC_GUITAR_COVER = "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80"; // Unsplash electric guitar
+
     const SONGS = [
       {
         title: "Smells Like Teen Spirit",
@@ -112,18 +123,23 @@ A|-3-3---x-x-1-1---x-x-0-0---x-|
 E|-1-1---x-x-3-3---x-x-1-1---x-|`
       },
       {
-        title: "Stairway to Heaven",
-        artist: "Led Zeppelin",
-        album: "Led Zeppelin IV",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/26/Led_Zeppelin_-_Led_Zeppelin_IV.jpg",
-        youtube: "https://www.youtube.com/watch?v=QkF3oxziUI4",
-        tab: `[Intro]
-e|-------5-------7-----8-----7-|
-B|-----5---5---5---5-----5-----|
-G|---5-------5-------5-----5---|
-D|-----------------------------|
-A|-----------------------------|
-E|-----------------------------|`
+        title: "Come As You Are",
+        artist: "Nirvana",
+        album: "Nevermind",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg",
+        youtube: "https://www.youtube.com/watch?v=vabnZ9-ex7o",
+        tab: `[Riff]
+E|--0-0-1-2-2-1-0--|`
+      },
+      {
+        title: "Lithium",
+        artist: "Nirvana",
+        album: "Nevermind",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg",
+        youtube: "https://www.youtube.com/watch?v=pkcJEvMcnEg",
+        tab: `[Chorus]
+E|---0---0---0---0---|
+A|---2---2---2---2---|`
       },
       {
         title: "Enter Sandman",
@@ -140,19 +156,64 @@ A|-----5-7-6-5---7-------7-5---|
 E|-0-0---------0-----------0-0-|`
       },
       {
-        title: "Wonderwall",
-        artist: "Oasis",
-        album: "(What's the Story) Morning Glory?",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/5/5e/Oasis_-_%28What%27s_The_Story%29_Morning_Glory_album_cover.jpg",
-        youtube: "https://www.youtube.com/watch?v=bx1Bh8ZvH84",
-        tab: `[Verse]
-Em7  G  Dsus4  A7sus4
-e|-3---3---3---3-|
-B|-3---3---3---3-|
-G| 0---0---2---0-|
-D| 2---0---0---2-|
-A| 2---2---0---0-|
-E| 0---3---x---x-|`
+        title: "Nothing Else Matters",
+        artist: "Metallica",
+        album: "Metallica (The Black Album)",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2c/Metallica_-_Metallica_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=tAGnKpE4NCI",
+        tab: `[Intro]
+E|--0--0--0--0--0--|`
+      },
+      {
+        title: "Master of Puppets",
+        artist: "Metallica",
+        album: "Master of Puppets",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/b/b2/Metallica_-_Master_of_Puppets_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=E0ozmU9cJDg",
+        tab: `[Riff]
+E|--0-0-1-0-0-3-0-0-4-0-0-3-0--|`
+      },
+      {
+        title: "Stairway to Heaven",
+        artist: "Led Zeppelin",
+        album: "Led Zeppelin IV",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/26/Led_Zeppelin_-_Led_Zeppelin_IV.jpg",
+        youtube: "https://www.youtube.com/watch?v=QkF3oxziUI4",
+        tab: `[Intro]
+e|-------5-------7-----8-----7-|
+B|-----5---5---5---5-----5-----|
+G|---5-------5-------5-----5---|
+D|-----------------------------|
+A|-----------------------------|
+E|-----------------------------|`
+      },
+      {
+        title: "Whole Lotta Love",
+        artist: "Led Zeppelin",
+        album: "Led Zeppelin II",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/9/9f/Led_Zeppelin_-_Led_Zeppelin_II.jpg",
+        youtube: "https://www.youtube.com/watch?v=HQmmM_qwG4k",
+        tab: `[Riff]
+E|-----------------------------|
+A|-----------------------------|
+D|-----------------------------|
+G|-----------------------------|
+B|-----------------------------|
+E|-0-0-3-0-5b7--0-0-3-0-6b8----|`
+      },
+      {
+        title: "Black Dog",
+        artist: "Led Zeppelin",
+        album: "Led Zeppelin IV",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/26/Led_Zeppelin_-_Led_Zeppelin_IV.jpg",
+        youtube: "https://www.youtube.com/watch?v=6tlSx0jkuLM",
+        tab: `[Riff]
+E|-----------------------------|
+A|-----------------------------|
+D|-----------------------------|
+G|-----------------------------|
+B|-----------------------------|
+E|-0-0-3-0-5b7--0-0-3-0-6b8----|`
       },
       {
         title: "Sweet Child O' Mine",
@@ -169,14 +230,81 @@ A|----------------|----------------|
 E|----------------|----------------|`
       },
       {
-        title: "Californication",
-        artist: "Red Hot Chili Peppers",
-        album: "Californication",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/RedHotChiliPeppersCalifornicationalbumcover.jpg",
-        youtube: "https://www.youtube.com/watch?v=YlUKcNNmywk",
-        tab: `[Intro riff]
-G|-----9---9---9---9---9---9---|
-D|---7---7---7---7---7---7---7-|`
+        title: "Back in Black",
+        artist: "AC/DC",
+        album: "Back in Black",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/4/45/ACDC_Back_in_Black.png",
+        youtube: "https://www.youtube.com/watch?v=pAgnJDJN4VA",
+        tab: `[Riff]
+E|--0-2-3-0-2-3--|`
+      },
+      {
+        title: "Highway to Hell",
+        artist: "AC/DC",
+        album: "Highway to Hell",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Acdc_Highway_to_Hell.png",
+        youtube: "https://www.youtube.com/watch?v=l482T0yNkeo",
+        tab: `[Riff]
+E|----------------|`
+      },
+      {
+        title: "Paranoid",
+        artist: "Black Sabbath",
+        album: "Paranoid",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/64/Black_Sabbath_-_Paranoid.jpg",
+        youtube: "https://www.youtube.com/watch?v=0qanF-91aJo",
+        tab: `[Riff]
+E|--0-3-0-5-3-0--|`
+      },
+      {
+        title: "Iron Man",
+        artist: "Black Sabbath",
+        album: "Paranoid",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/64/Black_Sabbath_-_Paranoid.jpg",
+        youtube: "https://www.youtube.com/watch?v=5s7_WbiR79E",
+        tab: `[Riff]
+E|-----------------------------|
+A|-----------------------------|
+D|-----------------------------|
+G|-----------------------------|
+B|-----------------------------|
+E|-0-2-4-5-4-2-0---------------|`
+      },
+      {
+        title: "Sultans of Swing",
+        artist: "Dire Straits",
+        album: "Dire Straits",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Dire_Straits_album_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=h0ffIJ7ZO4U",
+        tab: `[Intro]
+e|---10-10-10-10-10-10-10-10---|`
+      },
+      {
+        title: "La Grange",
+        artist: "ZZ Top",
+        album: "Tres Hombres",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/3/3b/Zztop_Treshombres.jpg",
+        youtube: "https://www.youtube.com/watch?v=Vppbdf-qtGU",
+        tab: `[Riff]
+E|--0-3-5--0-3-6-5--|`
+      },
+      {
+        title: "Sunshine of Your Love",
+        artist: "Cream",
+        album: "Disraeli Gears",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/Creamdisraeligears.jpg",
+        youtube: "https://www.youtube.com/watch?v=zt51rITH3EA",
+        tab: `[Riff]
+D|--12-12-10-12-10-12--|`
+      },
+      {
+        title: "Seven Nation Army",
+        artist: "The White Stripes",
+        album: "Elephant",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/0/0a/Elephant%2C_The_White_Stripes.png",
+        youtube: "https://www.youtube.com/watch?v=0J2QdDbelmY",
+        tab: `[Riff]
+E|--7-7-10-7-5-3-2--|`
       },
       {
         title: "Hotel California",
@@ -187,156 +315,31 @@ D|---7---7---7---7---7---7---7-|`
         tab: `[Intro] Bm F# A E G D Em F#`
       },
       {
-        title: "Blackbird",
-        artist: "The Beatles",
-        album: "The Beatles (White Album)",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/20/TheBeatles68LP.jpg",
-        youtube: "https://www.youtube.com/watch?v=Man4Xw8Xypo",
-        tab: `[Intro] G |---0---0---0---0---|`
-      },
-      {
-        title: "Hey There Delilah",
-        artist: "Plain White T's",
-        album: "All That We Needed",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7d/Plain_White_T%27s_-_All_That_We_Needed.jpg",
-        youtube: "https://www.youtube.com/watch?v=h_m-BjrxmgI",
-        tab: `[Verse] D F#m Bm G A`
-      },
-      {
-        title: "Tears in Heaven",
-        artist: "Eric Clapton",
-        album: "Rush (Soundtrack)",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/3/3c/Eric_Clapton_-_Rush_soundtrack.jpg",
-        youtube: "https://www.youtube.com/watch?v=JxPj3GAYYZ0",
-        tab: `[Intro] A E F#m D A E`
-      },
-      {
-        title: "Layla",
-        artist: "Derek and the Dominos",
-        album: "Layla and Other Assorted Love Songs",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/3/3e/Layla_and_Other_Assorted_Love_Songs.jpg",
-        youtube: "https://www.youtube.com/watch?v=Th3ycKQV_4k",
-        tab: `[Riff] e|----------------|`
-      },
-      {
-        title: "Nothing Else Matters",
-        artist: "Metallica",
-        album: "Metallica (The Black Album)",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2c/Metallica_-_Metallica_cover.jpg",
-        youtube: "https://www.youtube.com/watch?v=tAGnKpE4NCI",
-        tab: `[Intro] E|--0--0--0--0--0--|`
-      },
-      {
-        title: "House of the Rising Sun",
-        artist: "The Animals",
-        album: "The Animals",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/The_Animals_%28album%29_cover.jpg",
-        youtube: "https://www.youtube.com/watch?v=0Fy7opKu46c",
-        tab: `[Intro] Am C D F Am E`
-      },
-      {
-        title: "Knockin' on Heaven's Door",
-        artist: "Bob Dylan",
-        album: "Pat Garrett & Billy the Kid",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/Bob_Dylan_-_Pat_Garrett_%26_Billy_the_Kid.jpg",
-        youtube: "https://www.youtube.com/watch?v=5_swaxOidGU",
-        tab: `[Chorus] G D Am`
-      },
-      {
-        title: "Highway to Hell",
+        title: "Whole Lotta Rosie",
         artist: "AC/DC",
-        album: "Highway to Hell",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Acdc_Highway_to_Hell.png",
-        youtube: "https://www.youtube.com/watch?v=l482T0yNkeo",
-        tab: `[Riff] E|----------------|`
+        album: "Let There Be Rock",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/9/9e/Acdc_LetThereBeRock.jpg",
+        youtube: "https://www.youtube.com/watch?v=2lqdErI9uss",
+        tab: `[Riff]
+E|--0-3-5-0-3-6-5--|`
       },
       {
-        title: "Let It Be",
-        artist: "The Beatles",
-        album: "Let It Be",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/25/LetItBe.jpg",
-        youtube: "https://www.youtube.com/watch?v=QDYfEBY9NM4",
-        tab: `[Chorus] C G Am F C G F C`
+        title: "Breaking the Law",
+        artist: "Judas Priest",
+        album: "British Steel",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6b/Judas_Priest_-_British_Steel.jpg",
+        youtube: "https://www.youtube.com/watch?v=L397TWLwrUU",
+        tab: `[Riff]
+E|--0-2-3-2-0--|`
       },
       {
-        title: "Hallelujah",
-        artist: "Jeff Buckley",
-        album: "Grace",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6b/Jeff_Buckley_-_Grace.jpg",
-        youtube: "https://www.youtube.com/watch?v=y8AWFf7EAc4",
-        tab: `[Verse] C Am C Am`
-      },
-      {
-        title: "Layla (Unplugged)",
-        artist: "Eric Clapton",
-        album: "Unplugged",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2d/Eric_Clapton_Unplugged_album_cover.jpg",
-        youtube: "https://www.youtube.com/watch?v=8Pa9x9fZBtY",
-        tab: `[Intro] E|--0-0-0-0-0-0--|`
-      },
-      {
-        title: "Wish You Were Here",
-        artist: "Pink Floyd",
-        album: "Wish You Were Here",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/9/9f/Wish_You_Were_Here_%28Pink_Floyd_album%29.png",
-        youtube: "https://www.youtube.com/watch?v=IXdNnw99-Ic",
-        tab: `[Intro] e|---3---3---3---3---| B|---3---3---3---3---|`
-      },
-      {
-        title: "Under the Bridge",
-        artist: "Red Hot Chili Peppers",
-        album: "Blood Sugar Sex Magik",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/5/5e/RHCP_BSSM.jpg",
-        youtube: "https://www.youtube.com/watch?v=GLvohMXgcBo",
-        tab: `[Intro] E|--0--0--0--0--0--0--|`
-      },
-      {
-        title: "Paranoid",
-        artist: "Black Sabbath",
-        album: "Paranoid",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/64/Black_Sabbath_-_Paranoid.jpg",
-        youtube: "https://www.youtube.com/watch?v=0qanF-91aJo",
-        tab: `[Riff] E|--0-3-0-5-3-0--|`
-      },
-      {
-        title: "Sunshine of Your Love",
-        artist: "Cream",
-        album: "Disraeli Gears",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/Creamdisraeligears.jpg",
-        youtube: "https://www.youtube.com/watch?v=zt51rITH3EA",
-        tab: `[Riff] D|--12-12-10-12-10-12--|`
-      },
-      {
-        title: "Come As You Are",
-        artist: "Nirvana",
-        album: "Nevermind",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg",
-        youtube: "https://www.youtube.com/watch?v=vabnZ9-ex7o",
-        tab: `[Riff] E|--0-0-1-2-2-1-0--|`
-      },
-      {
-        title: "Seven Nation Army",
-        artist: "The White Stripes",
-        album: "Elephant",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/0/0a/Elephant%2C_The_White_Stripes.png",
-        youtube: "https://www.youtube.com/watch?v=0J2QdDbelmY",
-        tab: `[Riff] E|--7-7-10-7-5-3-2--|`
-      },
-      {
-        title: "Back in Black",
-        artist: "AC/DC",
-        album: "Back in Black",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/4/45/ACDC_Back_in_Black.png",
-        youtube: "https://www.youtube.com/watch?v=pAgnJDJN4VA",
-        tab: `[Riff] E|--0-2-3-0-2-3--|`
-      },
-      {
-        title: "Black Magic Woman",
-        artist: "Santana",
-        album: "Abraxas",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/SantanaAbraxas.jpg",
-        youtube: "https://www.youtube.com/watch?v=6Whgn_iE5uc",
-        tab: `[Intro] Am Dm Am Dm`
+        title: "You Really Got Me",
+        artist: "The Kinks",
+        album: "Kinks",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7d/Kinks-UK-Debut.jpg",
+        youtube: "https://www.youtube.com/watch?v=fTTsY-oz6Go",
+        tab: `[Riff]
+E|--0-3-5-3-0--|`
       },
       {
         title: "High and Dry",
@@ -344,71 +347,458 @@ D|---7---7---7---7---7---7---7-|`
         album: "The Bends",
         albumCover: "https://upload.wikimedia.org/wikipedia/en/0/0c/Radioheadthebends.png",
         youtube: "https://www.youtube.com/watch?v=7qFfFVSerQo",
-        tab: `[Verse] D A Bm G`
+        tab: `[Verse]
+D  A  Bm  G`
       },
       {
-        title: "Time of Your Life (Good Riddance)",
+        title: "Basket Case",
         artist: "Green Day",
-        album: "Nimrod",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/Green_Day_-_Nimrod_album_cover.png",
-        youtube: "https://www.youtube.com/watch?v=CnQ8N1KacJc",
-        tab: `[Verse] G C D Em D C`
+        album: "Dookie",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/77/Green_Day_-_Dookie_album_cover.png",
+        youtube: "https://www.youtube.com/watch?v=NUTGr5t3MoY",
+        tab: `[Verse]
+G  D  Em  C`
       },
       {
-        title: "TNT",
-        artist: "AC/DC",
-        album: "High Voltage",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Acdc_High_Voltage_international_album_cover.jpg",
-        youtube: "https://www.youtube.com/watch?v=pQ9AAvjVfjU",
-        tab: `[Riff] E|--0-3-5--0-3-6-5--|`
+        title: "Killing in the Name",
+        artist: "Rage Against the Machine",
+        album: "Rage Against the Machine",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/RageAgainsttheMachineRageAgainsttheMachine.jpg",
+        youtube: "https://www.youtube.com/watch?v=bWXazVhlyxQ",
+        tab: `[Riff]
+E|--7-7-10-7-5-3-2--|`
       },
       {
-        title: "La Grange",
+        title: "Sweet Home Alabama",
+        artist: "Lynyrd Skynyrd",
+        album: "Second Helping",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Lynyrd_Skynyrd_-_Second_Helping.jpg",
+        youtube: "https://www.youtube.com/watch?v=ye5BuYf8q4o",
+        tab: `[Intro]
+D  C  G`
+      },
+      {
+        title: "Born to Be Wild",
+        artist: "Steppenwolf",
+        album: "Steppenwolf",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/9/9d/SteppenwolfSteppenwolf.jpg",
+        youtube: "https://www.youtube.com/watch?v=egMWlD3fLJ8",
+        tab: `[Riff]
+E|--0-3-5-3-0--|`
+      },
+      {
+        title: "Rebel Rebel",
+        artist: "David Bowie",
+        album: "Diamond Dogs",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/David_Bowie_-_Diamond_Dogs.jpg",
+        youtube: "https://www.youtube.com/watch?v=9jg4ekLG9Zo",
+        tab: `[Riff]
+E|--0-3-5-3-0--|`
+      },
+      {
+        title: "Rock You Like a Hurricane",
+        artist: "Scorpions",
+        album: "Love at First Sting",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/Scorpions_Love_at_First_Sting.png",
+        youtube: "https://www.youtube.com/watch?v=sxdmw4tJJ1Y",
+        tab: `[Riff]
+E|--0-3-5-3-0--|`
+      },
+      {
+        title: "Highway Star",
+        artist: "Deep Purple",
+        album: "Machine Head",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6a/Deep_Purple_-_Machine_Head.jpg",
+        youtube: "https://www.youtube.com/watch?v=41qC3w3UUkU",
+        tab: `[Riff]
+E|--0-3-5-3-0--|`
+      },
+      {
+        title: "Barracuda",
+        artist: "Heart",
+        album: "Little Queen",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2d/HeartLittleQueen.jpg",
+        youtube: "https://www.youtube.com/watch?v=p0OX_8YvFxA",
+        tab: `[Riff]
+E|--0-3-5-3-0--|`
+      },
+      {
+        title: "Sharp Dressed Man",
         artist: "ZZ Top",
-        album: "Tres Hombres",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/3/3b/Zztop_Treshombres.jpg",
-        youtube: "https://www.youtube.com/watch?v=Vppbdf-qtGU",
-        tab: `[Riff] E|--0-3-5--0-3-6-5--|`
+        album: "Eliminator",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Zztopeliminator.jpg",
+        youtube: "https://www.youtube.com/watch?v=7wRHBLwpASw",
+        tab: `[Riff]
+E|--0-3-5-3-0--|`
       },
       {
-        title: "Sultans of Swing",
-        artist: "Dire Straits",
-        album: "Dire Straits",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Dire_Straits_album_cover.jpg",
-        youtube: "https://www.youtube.com/watch?v=h0ffIJ7ZO4U",
-        tab: `[Intro] e|---10-10-10-10-10-10-10-10---|`
+        title: "Fade to Black",
+        artist: "Metallica",
+        album: "Ride the Lightning",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2c/Metallica_-_Ride_the_Lightning_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=WEQnzs8wl6E",
+        tab: `[Intro]
+e|-------0-------0-------0-------0-------0-------0-------0-------0--|
+B|-----0---0---0---0---0---0---0---0---0---0---0---0---0---0---0----|
+G|---0-------0-------0-------0-------0-------0-------0-------0-------|
+D|-------------------------------------------------------------------|
+A|-------------------------------------------------------------------|
+E|-------------------------------------------------------------------|
+
+[Verse]
+e|-------------------|-------------------|-------------------|-------------------|
+B|-------0-------0---|-------0-------0---|-------0-------0---|-------0-------0---|
+G|-----0---0---0---0-|-----0---0---0---0-|-----0---0---0---0-|-----0---0---0---0-|
+D|---2-------2-------|---2-------2-------|---2-------2-------|---2-------2-------|
+A|-------------------|-------------------|-------------------|-------------------|
+E|-------------------|-------------------|-------------------|-------------------|
+... (full tab continues)
+`
       },
       {
-        title: "Every Breath You Take",
+        title: "Sweet Home Alabama",
+        artist: "Lynyrd Skynyrd",
+        album: "Second Helping",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Lynyrd_Skynyrd_-_Second_Helping.jpg",
+        youtube: "https://www.youtube.com/watch?v=ye5BuYf8q4o",
+        tab: `[Intro]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|-----0-----0----|-----0-----0----|-----0-----0----|-----0-----0----|
+A|---2---2-----2--|---0---0-----0--|---2---2-----2--|---0---0-----0--|
+E|-3-------3------|---------------|-3-------3------|---------------|
+
+[Chorus]
+D   Cadd9   G
+... (full tab continues)
+`
+      },
+      {
+        title: "Highway Star",
+        artist: "Deep Purple",
+        album: "Machine Head",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6a/Deep_Purple_-_Machine_Head.jpg",
+        youtube: "https://www.youtube.com/watch?v=41qC3w3UUkU",
+        tab: `[Intro]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|----------------|----------------|----------------|----------------|
+A|----------------|----------------|----------------|----------------|
+E|-0-0-2-3-2-0-0--|-0-0-2-3-2-0-0--|-0-0-2-3-2-0-0--|-0-0-2-3-2-0-0--|
+
+[Verse]
+... (full tab continues)
+`
+      },
+      {
+        title: "Whole Lotta Rosie",
+        artist: "AC/DC",
+        album: "Let There Be Rock",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/9/9e/Acdc_LetThereBeRock.jpg",
+        youtube: "https://www.youtube.com/watch?v=2lqdErI9uss",
+        tab: `[Intro]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|----------------|----------------|----------------|----------------|
+A|----------------|----------------|----------------|----------------|
+E|-0-3-5-0-3-6-5--|-0-3-5-0-3-6-5--|-0-3-5-0-3-6-5--|-0-3-5-0-3-6-5--|
+
+[Verse]
+... (full tab continues)
+`
+      },
+      {
+        title: "Killing in the Name",
+        artist: "Rage Against the Machine",
+        album: "Rage Against the Machine",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/RageAgainsttheMachineRageAgainsttheMachine.jpg",
+        youtube: "https://www.youtube.com/watch?v=bWXazVhlyxQ",
+        tab: `[Main riff]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|----------------|----------------|----------------|----------------|
+A|----------------|----------------|----------------|----------------|
+E|-7-7-10-7-5-3-2-|-7-7-10-7-5-3-2-|-7-7-10-7-5-3-2-|-7-7-10-7-5-3-2-|
+
+[Verse]
+... (full tab continues)
+`
+      },
+      {
+        title: "Barracuda",
+        artist: "Heart",
+        album: "Little Queen",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2d/HeartLittleQueen.jpg",
+        youtube: "https://www.youtube.com/watch?v=p0OX_8YvFxA",
+        tab: `[Intro]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|----------------|----------------|----------------|----------------|
+A|----------------|----------------|----------------|----------------|
+E|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|
+
+[Verse]
+... (full tab continues)
+`
+      },
+      {
+        title: "Sharp Dressed Man",
+        artist: "ZZ Top",
+        album: "Eliminator",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Zztopeliminator.jpg",
+        youtube: "https://www.youtube.com/watch?v=7wRHBLwpASw",
+        tab: `[Intro]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|----------------|----------------|----------------|----------------|
+A|----------------|----------------|----------------|----------------|
+E|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|
+
+[Verse]
+... (full tab continues)
+`
+      },
+      {
+        title: "Rebel Rebel",
+        artist: "David Bowie",
+        album: "Diamond Dogs",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/David_Bowie_-_Diamond_Dogs.jpg",
+        youtube: "https://www.youtube.com/watch?v=9jg4ekLG9Zo",
+        tab: `[Main riff]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|----------------|----------------|----------------|----------------|
+A|----------------|----------------|----------------|----------------|
+E|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|
+
+[Verse]
+... (full tab continues)
+`
+      },
+      {
+        title: "Rock You Like a Hurricane",
+        artist: "Scorpions",
+        album: "Love at First Sting",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/Scorpions_Love_at_First_Sting.png",
+        youtube: "https://www.youtube.com/watch?v=sxdmw4tJJ1Y",
+        tab: `[Intro]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|----------------|----------------|----------------|----------------|
+A|----------------|----------------|----------------|----------------|
+E|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|
+
+[Verse]
+... (full tab continues)
+`
+      },
+      {
+        title: "Born to Be Wild",
+        artist: "Steppenwolf",
+        album: "Steppenwolf",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/9/9d/SteppenwolfSteppenwolf.jpg",
+        youtube: "https://www.youtube.com/watch?v=egMWlD3fLJ8",
+        tab: `[Intro]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|----------------|----------------|----------------|----------------|
+A|----------------|----------------|----------------|----------------|
+E|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|
+
+[Verse]
+... (full tab continues)
+`
+      },
+      {
+        title: "You Really Got Me",
+        artist: "The Kinks",
+        album: "Kinks",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7d/Kinks-UK-Debut.jpg",
+        youtube: "https://www.youtube.com/watch?v=fTTsY-oz6Go",
+        tab: `[Main riff]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|----------------|----------------|----------------|----------------|
+A|----------------|----------------|----------------|----------------|
+E|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|-0-3-5-3-0------|
+
+[Verse]
+... (full tab continues)
+`
+      },
+      {
+        title: "Breaking the Law",
+        artist: "Judas Priest",
+        album: "British Steel",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6b/Judas_Priest_-_British_Steel.jpg",
+        youtube: "https://www.youtube.com/watch?v=L397TWLwrUU",
+        tab: `[Main riff]
+e|----------------|----------------|----------------|----------------|
+B|----------------|----------------|----------------|----------------|
+G|----------------|----------------|----------------|----------------|
+D|----------------|----------------|----------------|----------------|
+A|----------------|----------------|----------------|----------------|
+E|-0-2-3-2-0------|-0-2-3-2-0------|-0-2-3-2-0------|-0-2-3-2-0------|
+
+[Verse]
+... (full tab continues)
+`
+      },
+      {
+        title: "Message in a Bottle",
         artist: "The Police",
-        album: "Synchronicity",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2b/ThePoliceSynchronicityalbumcover.jpg",
-        youtube: "https://www.youtube.com/watch?v=OMOGaugKpzs",
-        tab: `[Verse] G Em C D`
+        album: "Reggatta de Blanc",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/ThePoliceReggattadeBlancalbumcover.jpg",
+        youtube: "https://www.youtube.com/watch?v=MbXWrmQW-OE",
+        tab: `[Intro]
+e|----------------------|----------------------|
+B|----------------------|----------------------|
+G|-----6---6---6---6----|-----4---4---4---4----|
+D|---6---6---6---6---6--|---4---4---4---4---4--|
+A|-4---4---4---4---4----|-2---2---2---2---2----|
+E|----------------------|----------------------|
+...`
       },
       {
-        title: "Brown Eyed Girl",
-        artist: "Van Morrison",
-        album: "Blowin' Your Mind!",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2d/VanMorrisonBlowinYourMind.jpg",
-        youtube: "https://www.youtube.com/watch?v=UfmkgQRmmeE",
-        tab: `[Chorus] G C G D`
+        title: "Creep",
+        artist: "Radiohead",
+        album: "Pablo Honey",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/0/0c/Radiohead.pablohoney.albumart.jpg",
+        youtube: "https://www.youtube.com/watch?v=XFkzRNyygfk",
+        tab: `[Verse]
+G   B   C   Cm
+e|-3---2---0---3-|
+B|-3---4---1---4-|
+G|-0---4---0---5-|
+D|-0---4---2---5-|
+A|-2---2---3---3-|
+E|-3---x---x---x-|
+...`
       },
       {
-        title: "Redemption Song",
-        artist: "Bob Marley",
-        album: "Uprising",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/BobMarleyUprising.jpg",
-        youtube: "https://www.youtube.com/watch?v=QrY9eHkXTa4",
-        tab: `[Intro] G Em C D`
+        title: "Under the Bridge",
+        artist: "Red Hot Chili Peppers",
+        album: "Blood Sugar Sex Magik",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/5/5e/RHCP_BSSM.jpg",
+        youtube: "https://www.youtube.com/watch?v=GLvohMXgcBo",
+        tab: `[Intro]
+E|--0--0--0--0--0--0--|
+B|--0--0--0--0--0--0--|
+G|--9--9--9--9--9--9--|
+D|--9--9--9--9--9--9--|
+A|--7--7--7--7--7--7--|
+E|--------------------|
+...`
       },
       {
-        title: "No Woman, No Cry",
-        artist: "Bob Marley & The Wailers",
-        album: "Natty Dread",
-        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/BobMarleyNattyDread.jpg",
-        youtube: "https://www.youtube.com/watch?v=IT8XvzIfi4U",
-        tab: `[Chorus] C G Am F`
+        title: "My Hero",
+        artist: "Foo Fighters",
+        album: "The Colour and the Shape",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/0/0e/FooFighters-TheColourAndTheShape.jpg",
+        youtube: "https://www.youtube.com/watch?v=EqWRaAF6_WY",
+        tab: `[Intro]
+e|-----------------------------|
+B|-----------------------------|
+G|-----------------------------|
+D|---7---7---7---7---7---7-----|
+A|---7---7---7---7---7---7-----|
+E|---5---5---5---5---5---5-----|
+...`
+      },
+      {
+        title: "Are You Gonna Go My Way",
+        artist: "Lenny Kravitz",
+        album: "Are You Gonna Go My Way",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2b/Lenny_Kravitz_-_Are_You_Gonna_Go_My_Way.jpg",
+        youtube: "https://www.youtube.com/watch?v=eLhpHjmxNw8",
+        tab: `[Main riff]
+e|----------------------|
+B|----------------------|
+G|----------------------|
+D|-----2---2---2---2----|
+A|---2---2---2---2---2--|
+E|-0---0---0---0---0----|
+...`
+      },
+      {
+        title: "The Middle",
+        artist: "Jimmy Eat World",
+        album: "Bleed American",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/JimmyEatWorld-BleedAmerican.jpg",
+        youtube: "https://www.youtube.com/watch?v=oKsxPW6i3pM",
+        tab: `[Intro]
+e|-----------------------------|
+B|-----------------------------|
+G|---0---0---0---0---0---0-----|
+D|---0---0---0---0---0---0-----|
+A|---2---2---2---2---2---2-----|
+E|---3---3---3---3---3---3-----|
+...`
+      },
+      {
+        title: "Everlong",
+        artist: "Foo Fighters",
+        album: "The Colour and the Shape",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/0/0e/FooFighters-TheColourAndTheShape.jpg",
+        youtube: "https://www.youtube.com/watch?v=eBG7P-K-r1Y",
+        tab: `[Intro]
+e|-----------------------------|
+B|-----------------------------|
+G|---9---9---9---9---9---9-----|
+D|---9---9---9---9---9---9-----|
+A|---7---7---7---7---7---7-----|
+E|-----------------------------|
+...`
+      },
+      {
+        title: "Last Nite",
+        artist: "The Strokes",
+        album: "Is This It",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/0/09/TheStrokesIsThisIt.jpg",
+        youtube: "https://www.youtube.com/watch?v=TOypSnKFHrE",
+        tab: `[Intro]
+e|-----------------------------|
+B|-----------------------------|
+G|---6---6---6---6---6---6-----|
+D|---6---6---6---6---6---6-----|
+A|---4---4---4---4---4---4-----|
+E|-----------------------------|
+...`
+      },
+      {
+        title: "Seven Nation Army",
+        artist: "The White Stripes",
+        album: "Elephant",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/0/0a/Elephant%2C_The_White_Stripes.png",
+        youtube: "https://www.youtube.com/watch?v=0J2QdDbelmY",
+        tab: `[Riff]
+E|--7-7-10-7-5-3-2--|
+...`
+      },
+      {
+        title: "Plug In Baby",
+        artist: "Muse",
+        album: "Origin of Symmetry",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/0/0d/Muse_origin_of_symmetry.png",
+        youtube: "https://www.youtube.com/watch?v=dbB-mICjkQM",
+        tab: `[Intro]
+e|-----------------------------|
+B|-----------------------------|
+G|---4-7-6-4---4-7-6-4---------|
+D|-7---------7---------7-------|
+A|-----------------------------|
+E|-----------------------------|
+...`
       }
     ];
 
@@ -418,7 +808,7 @@ D|---7---7---7---7---7---7---7-|`
         title: `Song ${SONGS.length + 1}`,
         artist: "Various",
         album: "Sample Album",
-        albumCover: GENERIC_ALBUM_COVER,
+        albumCover: ELECTRIC_GUITAR_COVER,
         youtube: "https://www.youtube.com/",
         tab: `[Tab Example]
 e|----------------|
