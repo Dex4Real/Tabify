@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tabify - Play Your Favourite Songs!</title>
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Fira+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: 
+        url('https://upload.wikimedia.org/wikipedia/commons/8/8e/Ibanez_RG550_Desert_Yellow.jpg') left 10vw top 10vh/350px auto no-repeat,
+        url('https://upload.wikimedia.org/wikipedia/commons/6/6e/Gibson_Les_Paul_54_Custom.jpg') right 10vw bottom 10vh/350px auto no-repeat,
+        radial-gradient(ellipse at center, #2d3748 60%, #111 100%);
+      min-height: 100vh;
+      background-blend-mode: lighten;
+    }
+    .funky-title {
+      font-family: 'Permanent Marker', cursive;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    .tab-mono {
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 1.1rem;
+    }
+    .guitar-neck {
+      background: repeating-linear-gradient(
+        90deg,
+        #bfa76f 0 10px,
+        #a68c4a 10px 20px
+      );
+      height: 40px;
+      width: 100vw;
+      margin: 0 auto 0.5rem auto;
+      box-shadow: 0 4px 16px #0006;
+      border-radius: 0 0 20px 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .guitar-body {
+      background: none;
+      border-radius: 0;
+      width: 100%;
+      height: auto;
+      margin: 0 auto 2rem auto;
+      box-shadow: none;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    @media (max-width: 600px) {
+      .guitar-body {
+        width: 95vw;
+        height: auto;
+      }
+    }
+    .album-cover {
+      border-radius: 1rem;
+      box-shadow: 0 8px 32px #000b;
+      object-fit: cover;
+      width: 100px;
+      height: 100px;
+      margin-right: 1.5rem;
+      border: 4px solid #fff3;
+      background: #fff;
+    }
+    .song-list-card {
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .song-list-card:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 8px 32px #facc15cc;
+      background: #facc15cc;
+    }
+    .big-album-cover {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px #000b;
+      border: 6px solid #fff3;
+      background: #fff;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+  <script>
+    const GENERIC_ALBUM_COVER = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+
+    const SONGS = [
+      {
+        title: "Smells Like Teen Spirit",
+        artist: "Nirvana",
+        album: "Nevermind",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg",
+        youtube: "https://www.youtube.com/watch?v=hTWKbfoikeg",
+        tab: `[Intro/Main riff]
+e|-----------------------------|
+B|-----------------------------|
+G|-----------------------------|
+D|-3-3---x-x-1-1---x-x-0-0---x-|
+A|-3-3---x-x-1-1---x-x-0-0---x-|
+E|-1-1---x-x-3-3---x-x-1-1---x-|`
+      },
+      {
+        title: "Stairway to Heaven",
+        artist: "Led Zeppelin",
+        album: "Led Zeppelin IV",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/26/Led_Zeppelin_-_Led_Zeppelin_IV.jpg",
+        youtube: "https://www.youtube.com/watch?v=QkF3oxziUI4",
+        tab: `[Intro]
+e|-------5-------7-----8-----7-|
+B|-----5---5---5---5-----5-----|
+G|---5-------5-------5-----5---|
+D|-----------------------------|
+A|-----------------------------|
+E|-----------------------------|`
+      },
+      {
+        title: "Enter Sandman",
+        artist: "Metallica",
+        album: "Metallica (The Black Album)",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2c/Metallica_-_Metallica_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=CD-E-LDc384",
+        tab: `[Main riff]
+e|-----------------------------|
+B|-----------------------------|
+G|-----------------------------|
+D|-----------------5-6-5-------|
+A|-----5-7-6-5---7-------7-5---|
+E|-0-0---------0-----------0-0-|`
+      },
+      {
+        title: "Wonderwall",
+        artist: "Oasis",
+        album: "(What's the Story) Morning Glory?",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/5/5e/Oasis_-_%28What%27s_The_Story%29_Morning_Glory_album_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=bx1Bh8ZvH84",
+        tab: `[Verse]
+Em7  G  Dsus4  A7sus4
+e|-3---3---3---3-|
+B|-3---3---3---3-|
+G| 0---0---2---0-|
+D| 2---0---0---2-|
+A| 2---2---0---0-|
+E| 0---3---x---x-|`
+      },
+      {
+        title: "Sweet Child O' Mine",
+        artist: "Guns N' Roses",
+        album: "Appetite for Destruction",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/60/GunsnRosesAppetiteforDestructionalbumcover.jpg",
+        youtube: "https://www.youtube.com/watch?v=1w7OgIMMRc4",
+        tab: `[Intro]
+e|----------------|----------------|
+B|----15----14----|----15----14----|
+G|-------14----14-|-------14----14-|
+D|--12------------|--12------------|
+A|----------------|----------------|
+E|----------------|----------------|`
+      },
+      {
+        title: "Californication",
+        artist: "Red Hot Chili Peppers",
+        album: "Californication",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/RedHotChiliPeppersCalifornicationalbumcover.jpg",
+        youtube: "https://www.youtube.com/watch?v=YlUKcNNmywk",
+        tab: `[Intro riff]
+G|-----9---9---9---9---9---9---|
+D|---7---7---7---7---7---7---7-|`
+      },
+      {
+        title: "Hotel California",
+        artist: "Eagles",
+        album: "Hotel California",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/4/49/Hotelcalifornia.jpg",
+        youtube: "https://www.youtube.com/watch?v=EqPtz5qN7HM",
+        tab: `[Intro] Bm F# A E G D Em F#`
+      },
+      {
+        title: "Blackbird",
+        artist: "The Beatles",
+        album: "The Beatles (White Album)",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/20/TheBeatles68LP.jpg",
+        youtube: "https://www.youtube.com/watch?v=Man4Xw8Xypo",
+        tab: `[Intro] G |---0---0---0---0---|`
+      },
+      {
+        title: "Hey There Delilah",
+        artist: "Plain White T's",
+        album: "All That We Needed",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7d/Plain_White_T%27s_-_All_That_We_Needed.jpg",
+        youtube: "https://www.youtube.com/watch?v=h_m-BjrxmgI",
+        tab: `[Verse] D F#m Bm G A`
+      },
+      {
+        title: "Tears in Heaven",
+        artist: "Eric Clapton",
+        album: "Rush (Soundtrack)",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/3/3c/Eric_Clapton_-_Rush_soundtrack.jpg",
+        youtube: "https://www.youtube.com/watch?v=JxPj3GAYYZ0",
+        tab: `[Intro] A E F#m D A E`
+      },
+      {
+        title: "Layla",
+        artist: "Derek and the Dominos",
+        album: "Layla and Other Assorted Love Songs",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/3/3e/Layla_and_Other_Assorted_Love_Songs.jpg",
+        youtube: "https://www.youtube.com/watch?v=Th3ycKQV_4k",
+        tab: `[Riff] e|----------------|`
+      },
+      {
+        title: "Nothing Else Matters",
+        artist: "Metallica",
+        album: "Metallica (The Black Album)",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2c/Metallica_-_Metallica_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=tAGnKpE4NCI",
+        tab: `[Intro] E|--0--0--0--0--0--|`
+      },
+      {
+        title: "House of the Rising Sun",
+        artist: "The Animals",
+        album: "The Animals",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/The_Animals_%28album%29_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=0Fy7opKu46c",
+        tab: `[Intro] Am C D F Am E`
+      },
+      {
+        title: "Knockin' on Heaven's Door",
+        artist: "Bob Dylan",
+        album: "Pat Garrett & Billy the Kid",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/Bob_Dylan_-_Pat_Garrett_%26_Billy_the_Kid.jpg",
+        youtube: "https://www.youtube.com/watch?v=5_swaxOidGU",
+        tab: `[Chorus] G D Am`
+      },
+      {
+        title: "Highway to Hell",
+        artist: "AC/DC",
+        album: "Highway to Hell",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Acdc_Highway_to_Hell.png",
+        youtube: "https://www.youtube.com/watch?v=l482T0yNkeo",
+        tab: `[Riff] E|----------------|`
+      },
+      {
+        title: "Let It Be",
+        artist: "The Beatles",
+        album: "Let It Be",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/25/LetItBe.jpg",
+        youtube: "https://www.youtube.com/watch?v=QDYfEBY9NM4",
+        tab: `[Chorus] C G Am F C G F C`
+      },
+      {
+        title: "Hallelujah",
+        artist: "Jeff Buckley",
+        album: "Grace",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6b/Jeff_Buckley_-_Grace.jpg",
+        youtube: "https://www.youtube.com/watch?v=y8AWFf7EAc4",
+        tab: `[Verse] C Am C Am`
+      },
+      {
+        title: "Layla (Unplugged)",
+        artist: "Eric Clapton",
+        album: "Unplugged",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2d/Eric_Clapton_Unplugged_album_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=8Pa9x9fZBtY",
+        tab: `[Intro] E|--0-0-0-0-0-0--|`
+      },
+      {
+        title: "Wish You Were Here",
+        artist: "Pink Floyd",
+        album: "Wish You Were Here",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/9/9f/Wish_You_Were_Here_%28Pink_Floyd_album%29.png",
+        youtube: "https://www.youtube.com/watch?v=IXdNnw99-Ic",
+        tab: `[Intro] e|---3---3---3---3---| B|---3---3---3---3---|`
+      },
+      {
+        title: "Under the Bridge",
+        artist: "Red Hot Chili Peppers",
+        album: "Blood Sugar Sex Magik",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/5/5e/RHCP_BSSM.jpg",
+        youtube: "https://www.youtube.com/watch?v=GLvohMXgcBo",
+        tab: `[Intro] E|--0--0--0--0--0--0--|`
+      },
+      {
+        title: "Paranoid",
+        artist: "Black Sabbath",
+        album: "Paranoid",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/64/Black_Sabbath_-_Paranoid.jpg",
+        youtube: "https://www.youtube.com/watch?v=0qanF-91aJo",
+        tab: `[Riff] E|--0-3-0-5-3-0--|`
+      },
+      {
+        title: "Sunshine of Your Love",
+        artist: "Cream",
+        album: "Disraeli Gears",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/Creamdisraeligears.jpg",
+        youtube: "https://www.youtube.com/watch?v=zt51rITH3EA",
+        tab: `[Riff] D|--12-12-10-12-10-12--|`
+      },
+      {
+        title: "Come As You Are",
+        artist: "Nirvana",
+        album: "Nevermind",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg",
+        youtube: "https://www.youtube.com/watch?v=vabnZ9-ex7o",
+        tab: `[Riff] E|--0-0-1-2-2-1-0--|`
+      },
+      {
+        title: "Seven Nation Army",
+        artist: "The White Stripes",
+        album: "Elephant",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/0/0a/Elephant%2C_The_White_Stripes.png",
+        youtube: "https://www.youtube.com/watch?v=0J2QdDbelmY",
+        tab: `[Riff] E|--7-7-10-7-5-3-2--|`
+      },
+      {
+        title: "Back in Black",
+        artist: "AC/DC",
+        album: "Back in Black",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/4/45/ACDC_Back_in_Black.png",
+        youtube: "https://www.youtube.com/watch?v=pAgnJDJN4VA",
+        tab: `[Riff] E|--0-2-3-0-2-3--|`
+      },
+      {
+        title: "Black Magic Woman",
+        artist: "Santana",
+        album: "Abraxas",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/SantanaAbraxas.jpg",
+        youtube: "https://www.youtube.com/watch?v=6Whgn_iE5uc",
+        tab: `[Intro] Am Dm Am Dm`
+      },
+      {
+        title: "High and Dry",
+        artist: "Radiohead",
+        album: "The Bends",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/0/0c/Radioheadthebends.png",
+        youtube: "https://www.youtube.com/watch?v=7qFfFVSerQo",
+        tab: `[Verse] D A Bm G`
+      },
+      {
+        title: "Time of Your Life (Good Riddance)",
+        artist: "Green Day",
+        album: "Nimrod",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/7/7e/Green_Day_-_Nimrod_album_cover.png",
+        youtube: "https://www.youtube.com/watch?v=CnQ8N1KacJc",
+        tab: `[Verse] G C D Em D C`
+      },
+      {
+        title: "TNT",
+        artist: "AC/DC",
+        album: "High Voltage",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Acdc_High_Voltage_international_album_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=pQ9AAvjVfjU",
+        tab: `[Riff] E|--0-3-5--0-3-6-5--|`
+      },
+      {
+        title: "La Grange",
+        artist: "ZZ Top",
+        album: "Tres Hombres",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/3/3b/Zztop_Treshombres.jpg",
+        youtube: "https://www.youtube.com/watch?v=Vppbdf-qtGU",
+        tab: `[Riff] E|--0-3-5--0-3-6-5--|`
+      },
+      {
+        title: "Sultans of Swing",
+        artist: "Dire Straits",
+        album: "Dire Straits",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Dire_Straits_album_cover.jpg",
+        youtube: "https://www.youtube.com/watch?v=h0ffIJ7ZO4U",
+        tab: `[Intro] e|---10-10-10-10-10-10-10-10---|`
+      },
+      {
+        title: "Every Breath You Take",
+        artist: "The Police",
+        album: "Synchronicity",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2b/ThePoliceSynchronicityalbumcover.jpg",
+        youtube: "https://www.youtube.com/watch?v=OMOGaugKpzs",
+        tab: `[Verse] G Em C D`
+      },
+      {
+        title: "Brown Eyed Girl",
+        artist: "Van Morrison",
+        album: "Blowin' Your Mind!",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2d/VanMorrisonBlowinYourMind.jpg",
+        youtube: "https://www.youtube.com/watch?v=UfmkgQRmmeE",
+        tab: `[Chorus] G C G D`
+      },
+      {
+        title: "Redemption Song",
+        artist: "Bob Marley",
+        album: "Uprising",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/BobMarleyUprising.jpg",
+        youtube: "https://www.youtube.com/watch?v=QrY9eHkXTa4",
+        tab: `[Intro] G Em C D`
+      },
+      {
+        title: "No Woman, No Cry",
+        artist: "Bob Marley & The Wailers",
+        album: "Natty Dread",
+        albumCover: "https://upload.wikimedia.org/wikipedia/en/2/2e/BobMarleyNattyDread.jpg",
+        youtube: "https://www.youtube.com/watch?v=IT8XvzIfi4U",
+        tab: `[Chorus] C G Am F`
+      }
+    ];
+
+    // Fill up to 100 with generic cover if needed
+    while (SONGS.length < 100) {
+      SONGS.push({
+        title: `Song ${SONGS.length + 1}`,
+        artist: "Various",
+        album: "Sample Album",
+        albumCover: GENERIC_ALBUM_COVER,
+        youtube: "https://www.youtube.com/",
+        tab: `[Tab Example]
+e|----------------|
+B|----------------|
+G|----------------|
+D|----------------|
+A|----------------|
+E|----------------|`
+      });
+    }
+
+    let selectedSong = null;
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const input = document.getElementById('tabify-search');
+      const results = document.getElementById('tabify-results');
+      const songView = document.getElementById('tabify-songview');
+
+      function renderSongs(filter = "") {
+        results.innerHTML = "";
+        songView.style.display = "none";
+        results.style.display = "block";
+        const filtered = SONGS.filter(song =>
+          song.title.toLowerCase().includes(filter) ||
+          song.artist.toLowerCase().includes(filter)
+        );
+        if (filtered.length === 0) {
+          results.innerHTML = `<div class="text-center text-red-400 font-bold text-lg">No results found.</div>`;
+          return;
+        }
+        filtered.forEach((song, idx) => {
+          results.innerHTML += `
+            <div class="song-list-card flex items-center bg-gray-900 bg-opacity-90 rounded-2xl p-4 shadow-xl border-2 border-yellow-500 mb-6 transition" data-idx="${idx}">
+              <img src="${song.albumCover}" alt="${song.album}" class="album-cover"/>
+              <div>
+                <div class="text-xl font-bold funky-title mb-1 text-yellow-300">${song.title}</div>
+                <div class="text-yellow-400 font-bold mb-1">${song.artist}</div>
+                <div class="text-yellow-200 text-sm mb-1 italic">${song.album}</div>
+              </div>
+            </div>
+          `;
+        });
+        // Add click listeners
+        document.querySelectorAll('.song-list-card').forEach(card => {
+          card.onclick = function() {
+            const idx = this.getAttribute('data-idx');
+            showSong(SONGS[idx]);
+          }
+        });
+      }
+
+      function showSong(song) {
+        selectedSong = song;
+        results.style.display = "none";
+        songView.style.display = "block";
+        songView.innerHTML = `
+          <div class="flex flex-col items-center">
+            <button id="tabify-backbtn" class="mb-6 px-6 py-2 rounded-full bg-yellow-500 text-black font-extrabold text-lg hover:bg-yellow-400 transition self-start">&larr; Back to Songs</button>
+            <img src="${song.albumCover}" alt="${song.album}" class="big-album-cover"/>
+            <div class="text-3xl font-bold funky-title mb-2 text-yellow-300 text-center">${song.title}</div>
+            <div class="text-yellow-400 font-bold mb-2 text-xl">${song.artist}</div>
+            <div class="text-yellow-200 text-lg mb-2 italic">${song.album}</div>
+            <pre class="tab-mono text-green-200 bg-black bg-opacity-80 rounded p-4 overflow-x-auto whitespace-pre-wrap text-lg leading-snug mb-6 w-full max-w-2xl">${song.tab}</pre>
+            <a href="${song.youtube}" target="_blank" class="inline-block px-6 py-3 rounded-full bg-pink-500 text-white font-extrabold text-lg hover:bg-pink-400 transition mb-4 shadow-lg">
+              ▶️ Watch on YouTube
+            </a>
+          </div>
+        `;
+        document.getElementById('tabify-backbtn').onclick = function() {
+          songView.style.display = "none";
+          results.style.display = "block";
+          input.value = "";
+          renderSongs();
+        }
+      }
+
+      renderSongs();
+
+      input.addEventListener('input', function () {
+        renderSongs(input.value.toLowerCase());
+      });
+    });
+  </script>
+</head>
+<body class="text-white">
+  <div class="min-h-screen flex flex-col items-center px-2 pb-8">
+    <!-- Guitar neck and body visual -->
+    <div class="guitar-neck"></div>
+    <div class="guitar-body flex flex-col items-center justify-center shadow-2xl mb-8" style="position:relative;">
+      <h1 class="funky-title text-5xl md:text-6xl text-yellow-700 mb-2 drop-shadow-lg mt-10 mx-auto" style="position:relative;z-index:2;">Tabify</h1>
+    </div>
+    <header class="w-full flex flex-col items-center py-2">
+      <p class="text-xl md:text-2xl text-yellow-200 font-bold mb-4 text-center">Search and play your favourite guitar songs!</p>
+    </header>
+    <main class="w-full max-w-4xl mx-auto">
+      <!-- Search Area -->
+      <div class="flex justify-center mb-8">
+        <input
+          id="tabify-search"
+          type="text"
+          placeholder="Search for a song or artist..."
+          class="w-full max-w-md rounded-full border-2 border-yellow-400 text-black p-4 text-lg font-bold shadow-lg focus:ring-2 focus:ring-yellow-400"
+          style="font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;"
+        />
+      </div>
+      <h2 class="text-3xl funky-title text-pink-400 mb-6 text-center">Popular Tabs</h2>
+      <div id="tabify-results"></div>
+      <div id="tabify-songview" style="display:none"></div>
+    </main>
+    <footer class="mt-12 text-center text-gray-400 text-lg font-bold">
+      🎸 Tabify &copy; 2025 &mdash; Play, Learn, Enjoy!
+    </footer>
+  </div>
+</body>
+</html>
